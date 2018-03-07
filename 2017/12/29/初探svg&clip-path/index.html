@@ -1,167 +1,192 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
+
+<!-- Head tag -->
 <head>
-  <meta charset="utf-8">
-  
-  <title>初探svg&amp;clip-path | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="SVGAI设计中保存svg 　　1.最好用简单的图形元素创建，尽量避免用path（路径长，不利于使用）　　2.根据情况将文本转换为轮廓，储存为样式元素（问题：何时用元素，何时用属性？）　　3.SVG怎样增加可访问性？　　　答：增加&amp;lt;title&amp;gt; &amp;lt;desc&amp;gt;元素　　4.了解Canvas与内联SVG的不同点　　5.SVG路径动画　　删掉头部信息，增加&amp;lt;defs&amp;gt;">
-<meta property="og:type" content="article">
-<meta property="og:title" content="初探svg&amp;clip-path">
-<meta property="og:url" content="http://yoursite.com/2017/12/29/初探svg&clip-path/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="SVGAI设计中保存svg 　　1.最好用简单的图形元素创建，尽量避免用path（路径长，不利于使用）　　2.根据情况将文本转换为轮廓，储存为样式元素（问题：何时用元素，何时用属性？）　　3.SVG怎样增加可访问性？　　　答：增加&amp;lt;title&amp;gt; &amp;lt;desc&amp;gt;元素　　4.了解Canvas与内联SVG的不同点　　5.SVG路径动画　　删掉头部信息，增加&amp;lt;defs&amp;gt;">
-<meta property="og:updated_time" content="2017-12-29T09:00:42.346Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="初探svg&amp;clip-path">
-<meta name="twitter:description" content="SVGAI设计中保存svg 　　1.最好用简单的图形元素创建，尽量避免用path（路径长，不利于使用）　　2.根据情况将文本转换为轮廓，储存为样式元素（问题：何时用元素，何时用属性？）　　3.SVG怎样增加可访问性？　　　答：增加&amp;lt;title&amp;gt; &amp;lt;desc&amp;gt;元素　　4.了解Canvas与内联SVG的不同点　　5.SVG路径动画　　删掉头部信息，增加&amp;lt;defs&amp;gt;">
-  
-  
-    <link rel="icon" href="/favicon.ico">
-  
-  <link rel="stylesheet" href="/css/typing.css">
-  <link rel="stylesheet" href="/css/donate.css">
-  
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    <!--Description-->
+    
+        <meta name="description" content="SVGAI设计中保存svg
+　　1.最好用简单的图形元素创建，尽量避免用path（路径长，不利于使用）　　2.根据情况将文本转换为轮廓，储存为样式元素（问题：何时用元素，何时用属性？）　　3.SVG怎样增加可访问性？　　　答：增加&amp;lt;title&amp;gt; &amp;lt;desc&amp;gt;元素　　4.了解C">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="AmyZeng">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="初探svg&amp;clip-path"/>
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Hexo"/>
+
+    <!--Page Cover-->
+    
+        <meta property="og:image" content=""/>
+    
+
+    <!-- Title -->
+    
+    <title>初探svg&amp;clip-path - Hexo</title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/main.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+
 </head>
 
-  
-    
-      <body>
-    
-  
-      <div id="container" class="container">
-        <article id="post-初探svg&amp;clip-path" class="article article-type-post" itemscope itemprop="blogPost">
-  <header id="header" class="header">
-  <nav id="main-nav" class="main-nav">
-    
-      <a class="main-nav-link" href="/">Home</a>
-    
-      <a class="main-nav-link" href="/archives">Archives</a>
-    
-      <a class="main-nav-link" href="/about">About</a>
-    
-  </nav>
-</header>
+<body>
 
-  <hr/>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Hexo</a>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/archives">Archives</a>
+            </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+            
+                <li><a href="https://www.facebook.com/" class="fb" target="_blank" data-title="Facebook"></a></li>
+            
+            
+                <li><a href="https://www.behance.net/" class="behance" target="_blank" data-title="Behance"></a></li>
+            
+            
+                <li><a href="https://plus.google.com/+Pixelhint/posts" class="google" target="_blank" data-title="Google+"></a></li>
+            
+            
+                <li><a href="https://dribbble.com/pixelhint" class="dribble" target="_blank" data-title="Dribble"></a></li>
+            
+            
+            
+            
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p>Copyright © 2014 magnetic.</p>
+            <p>Template by <a href="http://pixelhint.com/magnetic-free-html5-responsive-photography-website-template/">Pixelhint.com</a></p>
+            <p>Hexo Theme by <a href="http://www.codeblocq.com/">Jonathan K.</a></p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix">
+
+    <section class="top" style="background: url('http://placehold.it/1300x500');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
         
-  
-    <h1 class="article-title" itemprop="name">
-      初探svg&amp;clip-path
-    </h1>
-  
+        <li><a href="/2018/01/02/css渐变与bootstrap应用/" class="previous" data-title="css渐变与响应式"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2017/12/27/写在2017末/" class="next" data-title="写在2017末"></a></li>
+        
+    </ul>
 
-      </header>
-    
-    <div class="article-entry typo" itemprop="articleBody">
-      
-        <h1 id="SVG"><a href="#SVG" class="headerlink" title="SVG"></a>SVG</h1><p><strong>AI设计中保存svg</strong></p>
+</div><!-- end work_nav -->
+            <h1 class="title">初探svg&clip-path</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Gallery -->
+            
+
+            <!-- Content -->
+            <h1 id="SVG"><a href="#SVG" class="headerlink" title="SVG"></a>SVG</h1><p><strong>AI设计中保存svg</strong></p>
 <p>　　1.最好用简单的图形元素创建，尽量避免用path（路径长，不利于使用）<br>　　2.根据情况将文本转换为轮廓，储存为<em>样式元素</em>（问题：何时用元素，何时用属性？）<br>　　3.SVG怎样增加可访问性？<br>　　　答：增加<code>&lt;title&gt; &lt;desc&gt;</code>元素<br>　　4.了解Canvas与内联SVG的不同点<br>　　5.SVG路径动画<br>　　<br><strong>删掉头部信息，增加<code>&lt;defs&gt;</code></strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">　　	&lt;svg&gt;</span><br><span class="line">    &lt;defs&gt;</span><br><span class="line">	　&lt;style&gt;&lt;/style&gt;可以添加animation</span><br><span class="line">    &lt;/defs&gt;</span><br><span class="line">	&lt;path class=&quot;#&quot;&gt;&lt;/path&gt;</span><br><span class="line">&lt;/svg&gt;</span><br></pre></td></tr></table></figure>
 <p>范例</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#shape &#123;</span><br><span class="line">     stroke-width: 6px;</span><br><span class="line">     fill: transparent;</span><br><span class="line">     stroke: #009FFD;</span><br><span class="line">     stroke-dasharray: 85 400;</span><br><span class="line">     stroke-dashoffset: -220;</span><br><span class="line">     transition: 1s all ease</span><br><span class="line">   &#125;</span><br><span class="line">   svg:hover #shape &#123;</span><br><span class="line">     stroke-dasharray: 70 0;</span><br><span class="line">     stroke-width: 3px;</span><br><span class="line">     stroke-dashoffset: 0;</span><br><span class="line">     stroke: #06D6A0</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"> &lt;svg height=&quot;40&quot; width=&quot;150&quot;&gt;</span><br><span class="line">   &lt;rect id=&quot;shape&quot; height=&quot;40&quot; width=&quot;150&quot; /&gt;</span><br><span class="line"> &lt;/svg&gt;</span><br></pre></td></tr></table></figure>
 <p>重点在于此<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.# &#123;</span><br><span class="line">	stroke-dasharray: 500;</span><br><span class="line">    stroke-dashoffset: 500;</span><br><span class="line">	animation: dash 4s linear infinite;</span><br><span class="line">	&#125;</span><br><span class="line">	@keyframes dash &#123;</span><br><span class="line">			to &#123;</span><br><span class="line">			 stroke-dashoffset: 0;</span><br><span class="line">			&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
 
-      
-      <div id="donate" class="donate">
-        <a id="github" href="https://github.com/" target="_blank" class="pos-f tr3" title="Github"></a>
-        <div id="DonateText" class="tr3">Donate</div>
-        <ul id="donateBox" class="list pos-f tr3">
-          <li id="PayPal"><a href="https://www.paypal.me/" target="_blank">PayPal</a></li>
-          <li id="BTC" data-footnote="Copy addres and show QRCode"><button id="BTCBn"  data-clipboard-target="#btc-key" alt="Copy to clipboard">Bitcoin</button></li>
-          <li id="AliPay">AliPay</li>
-          <li id="WeChat">WeChat</li>
-        </ul>
-        <div id="QRBox" class="pos-f left-100">
-          <div id="BTCQR" class="MainBox" style="background-image: url()"></div>
-          <div id="AliPayQR" class="MainBox" style="background-image: url()"></div>
-          <div id="WeChatQR" class="MainBox" style="background-image: url()"></div>
-        </div>
-        <!-- Bitcoin 账号 -->
-        <input id="btc-key" type="text" value="" readonly="readonly">
-      </div>
-    </div>
-    <footer class="article-footer">
-      <ul class="article-meta">
-        <li>
-          <span class="label">Published Date:</span>
-          <a href="/2017/12/29/初探svg&clip-path/" class="article-date">
-  <time datetime="2017-12-28T16:00:00.000Z" itemprop="datePublished">2017-12-29</time>
-</a>
 
-        </li>
-        
-        
-        <hr/>
-      </ul>
-    </footer>
-  </div>
-  
+            <!-- Tags -->
+            
+
+
+<div class="tags">
     
-<nav id="article-nav" class="article-nav">
-  
-    <a href="/2018/01/02/css渐变与bootstrap应用/" id="article-nav-newer" class="article-nav-link-wrap newer">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          css渐变与响应式
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/12/27/写在2017末/" id="article-nav-older" class="article-nav-link-wrap older">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">写在2017末</div>
-    </a>
-  
-</nav>
+</div>
 
 
-  
-</article>
+
+            <!-- Comments -->
+            <div>
+                
 
 
 
 
+            </div>
+        </div><!-- end content -->
+    </section>
+</section><!-- end main -->
 
-      </div>
-      
-    <footer id="footer" class="post-footer footer">
-      
-      <hr/>
-      <div id="footerContent" class="footer-content">
-        <p>Hi new friend!</p>
+<!-- After footer scripts -->
 
+<!-- jQuery -->
+<script src="/js/jquery.js"></script>
 
-      </div>
-    </footer>
+<!-- Custom Code -->
+<script src="/js/main.js"></script>
 
-      
+<!-- Gallery -->
+<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 
-
-
-<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
+<!-- Disqus Comments -->
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+</body>
 
-
-<script src="/js/typing.js"></script>
-<!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
-
-
-
-
-
-
-
-    </div>
-  </body>
 </html>
